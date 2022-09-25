@@ -11,6 +11,13 @@ namespace Entities {
             _possiblePaths = possiblePaths;
         }
 
+        public City(Vector2 position) {
+            _position = position;
+            _possiblePaths = new HashSet<Path>();
+        }
+
+        public void AddPathToSet(Path pathToAdd) => _possiblePaths.Add(pathToAdd);
+
         public Vector2 Position => _position;
         public HashSet<Path> PossiblePaths => _possiblePaths;
     }
