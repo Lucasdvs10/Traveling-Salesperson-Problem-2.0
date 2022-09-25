@@ -35,6 +35,9 @@ namespace Tests {
             _ant.GoToNextCity();
             
             Assert.AreNotEqual(cityA, _ant.CurrentCity);
+            
+            _ant.GoToNextCity();
+            Assert.AreNotEqual(cityB, _ant.CurrentCity);
 
         }
         

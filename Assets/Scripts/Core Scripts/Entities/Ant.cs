@@ -6,8 +6,7 @@ namespace Entities {
         private City _currentCity;
         private HashSet<City> _visitedCity;
         private HashSet<Path> _visitedPaths;
-
-
+        
         public void GoToNextCity() {
             foreach (var path in CurrentCity.PossiblePaths) {
                 
@@ -18,7 +17,12 @@ namespace Entities {
                 var choseThisPath = true; //Variável mockada para fins de teste
                 
                 if (choseThisPath) {
-                    _currentCity = path.CitiesPath[1];
+
+                    if (path.CitiesPath[1] != _currentCity) {
+                        _currentCity = path.CitiesPath[1];
+                        return;
+                    }
+                    _currentCity = path.CitiesPath[0];
                     return;
                 }
             }
