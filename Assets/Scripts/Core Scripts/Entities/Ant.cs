@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -25,10 +26,14 @@ namespace Entities {
                 
                 var thisPathHasBeenChosen = RollDice(probabilityToChooseThisPath);
                 
-                if (thisPathHasBeenChosen) //Viajando até o caminho caso tenha sido selecionado
+                if (thisPathHasBeenChosen) { //Viajando até o caminho caso tenha sido selecionado
                     TravelOnPath(path);
-                
+                    return;
+                }
             }
+            
+            TravelOnPath(CurrentCity.PossiblePaths.ToArray()[0]);
+            
         }
         public void TravelOnPath(Path path) {
             if (path.CitiesPath[1] != _currentCity) {

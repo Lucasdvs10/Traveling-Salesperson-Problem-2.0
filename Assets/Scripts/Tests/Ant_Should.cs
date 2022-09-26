@@ -40,6 +40,5 @@ namespace Tests {
             Assert.AreNotEqual(cityB, _ant.CurrentCity);
 
         }
-        
     }
 }
