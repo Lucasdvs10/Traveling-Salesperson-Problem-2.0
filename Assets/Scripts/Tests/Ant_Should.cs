@@ -10,7 +10,7 @@ namespace Tests {
         [SetUp]
         public void SetupTests() {
             var cityA = new City(Vector2.one);
-            _ant = new Ant(cityA);
+            _ant = new Ant(cityA, 2, 2);
         }
         
         [Test]
@@ -25,18 +25,18 @@ namespace Tests {
             var cityA = new City(Vector2.one);
             var cityB = new City(Vector2.one * 10);
 
-            _ant = new Ant(cityA);
+            _ant = new Ant(cityA, 2, 2);
             
             Path mockPath = new Path(cityA, cityB, 10f) ;
             
             cityA.AddPathToSet(mockPath);
             cityB.AddPathToSet(mockPath);
 
-            _ant.GoToNextCity();
+            _ant.PickNextCityAndGo();
             
             Assert.AreNotEqual(cityA, _ant.CurrentCity);
             
-            _ant.GoToNextCity();
+            _ant.PickNextCityAndGo();
             Assert.AreNotEqual(cityB, _ant.CurrentCity);
 
         }
