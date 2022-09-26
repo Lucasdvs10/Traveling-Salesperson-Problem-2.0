@@ -20,7 +20,6 @@ namespace Entities {
             if(pathToAdd.CitiesPath[0] != this && pathToAdd.CitiesPath[1] != this) return;
             _possiblePaths.Add(pathToAdd);
         }
-
         public Vector2 Position => _position;
         public HashSet<Path> PossiblePaths => _possiblePaths;
     }

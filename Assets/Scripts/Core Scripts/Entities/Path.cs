@@ -13,6 +13,14 @@ namespace Entities {
             _distance = Vector2.Distance(cityA.Position, cityB.Position);
         }
 
+        public override int GetHashCode() {
+            return _citiesPath[0].GetHashCode() + _citiesPath[1].GetHashCode();
+        }
+
+        public override bool Equals(object obj) {
+            return obj.GetHashCode() == GetHashCode();
+        }
+
         public void SetPheromonAmount(float newAmount) => _pheromonAmount = newAmount;
         public City[] CitiesPath => _citiesPath;
         public float Distance => _distance;
