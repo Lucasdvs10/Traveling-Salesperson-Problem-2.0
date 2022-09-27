@@ -7,7 +7,7 @@ namespace Core_Scripts.Entities {
     public class Ant {
         private City _initialCity;
         private City _currentCity;
-        private HashSet<City> _visitedCity;
+        private HashSet<City> _visitedCities;
         private HashSet<Path> _visitedPaths;
         private readonly float _pheromonInfluence; //Definindo parâmetros de influencia de feromônio e da distância
         private readonly float _distanceInfluence;
@@ -15,6 +15,11 @@ namespace Core_Scripts.Entities {
         
         public void PickNextCityAndGo() {
             var probabilitySum = 0f;
+            
+            if (GetAvaiblePathsFromCurrentCity().Count == 0) {
+                ResetAnt();
+                return;
+            }
             
             foreach (var path in GetAvaiblePathsFromCurrentCity()) { //Somando todas as probabilidades
                 probabilitySum += Mathf.Pow(path.PheromonAmount, _pheromonInfluence) * Mathf.Pow(1 / path.Distance, _distanceInfluence);
@@ -35,6 +40,13 @@ namespace Core_Scripts.Entities {
             TravelOnPath(GetAvaiblePathsFromCurrentCity().ToArray()[0]);
             
         }
+
+        private void ResetAnt() {
+            ReturnToInitialCity();
+            _totalDistance = 0;
+            _visitedPaths.Clear();
+            _visitedCities.Clear();
+        }
         public void TravelOnPath(Path path) {
             _visitedPaths.Add(path);
             _totalDistance += path.Distance;
@@ -47,7 +59,7 @@ namespace Core_Scripts.Entities {
         }
 
         public void GoToCity(City city) {
-            _visitedCity.Add(city);
+            _visitedCities.Add(city);
             _currentCity = city;
         }
         
@@ -70,7 +82,7 @@ namespace Core_Scripts.Entities {
             _pheromonInfluence = pheromonInfluence;
             _distanceInfluence = distanceInfluence;
             _totalDistance = 0f;
-            _visitedCity = new HashSet<City> { _initialCity};
+            _visitedCities = new HashSet<City> { _initialCity};
             _visitedPaths = new HashSet<Path>();
         }
 
@@ -78,7 +90,7 @@ namespace Core_Scripts.Entities {
             HashSet<Path> avaiblePaths = new HashSet<Path>();
 
             foreach (var path in CurrentCity.PossiblePaths) {
-                if (!_visitedCity.Contains(path.CitiesPath[0]) || !_visitedCity.Contains(path.CitiesPath[1]))
+                if (!_visitedCities.Contains(path.CitiesPath[0]) || !_visitedCities.Contains(path.CitiesPath[1]))
                     avaiblePaths.Add(path);
             }
 
@@ -89,7 +101,7 @@ namespace Core_Scripts.Entities {
 
         public City CurrentCity => _currentCity;
 
-        public HashSet<City> VisitedCity => _visitedCity;
+        public HashSet<City> VisitedCities => _visitedCities;
 
         public HashSet<Path> VisitedPaths => _visitedPaths;
 
