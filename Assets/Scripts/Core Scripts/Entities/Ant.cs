@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Entities {
+namespace Core_Scripts.Entities {
     public class Ant {
         private City _initialCity;
         private City _currentCity;
@@ -11,6 +11,7 @@ namespace Entities {
         private HashSet<Path> _visitedPaths;
         private readonly float _pheromonInfluence; //Definindo parâmetros de influencia de feromônio e da distância
         private readonly float _distanceInfluence;
+        private float _totalDistance;
         
         public void PickNextCityAndGo() {
             var probabilitySum = 0f;
@@ -25,7 +26,6 @@ namespace Entities {
                     (Mathf.Pow(path.PheromonAmount, _pheromonInfluence) * Mathf.Pow(1 / path.Distance, _distanceInfluence)) / probabilitySum;
                 
                 var thisPathHasBeenChosen = RollDice(probabilityToChooseThisPath);
-                
                 if (thisPathHasBeenChosen) { //Viajando até o caminho caso tenha sido selecionado
                     TravelOnPath(path);
                     return;
@@ -36,15 +36,18 @@ namespace Entities {
             
         }
         public void TravelOnPath(Path path) {
+            _visitedPaths.Add(path);
+            _totalDistance += path.Distance;
+
             if (path.CitiesPath[1] != _currentCity) {
                 GoToCity(path.CitiesPath[1]);
                 return;
             }
-
             GoToCity(path.CitiesPath[0]);
         }
 
         public void GoToCity(City city) {
+            _visitedCity.Add(city);
             _currentCity = city;
         }
         
@@ -66,6 +69,9 @@ namespace Entities {
             _currentCity = _initialCity;
             _pheromonInfluence = pheromonInfluence;
             _distanceInfluence = distanceInfluence;
+            _totalDistance = 0f;
+            _visitedCity = new HashSet<City> { _initialCity};
+            _visitedPaths = new HashSet<Path>();
         }
 
         public City InitialCity => _initialCity;
@@ -76,6 +82,6 @@ namespace Entities {
 
         public HashSet<Path> VisitedPaths => _visitedPaths;
 
-
+        public float TotalDistance => _totalDistance;
     }
 }

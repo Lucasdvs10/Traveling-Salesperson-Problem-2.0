@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Entities {
+namespace Core_Scripts.Entities {
     public class Path {
         private City[] _citiesPath;
         private float _distance;

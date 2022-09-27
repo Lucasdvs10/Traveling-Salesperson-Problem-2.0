@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Entities {
+namespace Core_Scripts.Entities {
     public class City {
         private Vector2 _position;
         private HashSet<Path> _possiblePaths;

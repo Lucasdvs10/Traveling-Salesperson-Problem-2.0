@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Entities;
+using Core_Scripts.Entities;
 using NUnit.Framework;
 using UnityEngine;
 using Assert = UnityEngine.Assertions.Assert;
