@@ -15,13 +15,13 @@ namespace Core_Scripts.Entities {
         
         public void PickNextCityAndGo() {
             var probabilitySum = 0f;
-
-            foreach (var path in CurrentCity.PossiblePaths) { //Somando todas as probabilidades
+            
+            foreach (var path in GetAvaiblePathsFromCurrentCity()) { //Somando todas as probabilidades
                 probabilitySum += Mathf.Pow(path.PheromonAmount, _pheromonInfluence) * Mathf.Pow(1 / path.Distance, _distanceInfluence);
             }
-            
-            foreach (var path in CurrentCity.PossiblePaths) {
-                
+
+            foreach (var path in GetAvaiblePathsFromCurrentCity()) {
+
                 var probabilityToChooseThisPath = //Calculando a probabilidade de escolher o caminho analisado atualmente
                     (Mathf.Pow(path.PheromonAmount, _pheromonInfluence) * Mathf.Pow(1 / path.Distance, _distanceInfluence)) / probabilitySum;
                 
@@ -32,7 +32,7 @@ namespace Core_Scripts.Entities {
                 }
             }
             
-            TravelOnPath(CurrentCity.PossiblePaths.ToArray()[0]);
+            TravelOnPath(GetAvaiblePathsFromCurrentCity().ToArray()[0]);
             
         }
         public void TravelOnPath(Path path) {
@@ -74,6 +74,17 @@ namespace Core_Scripts.Entities {
             _visitedPaths = new HashSet<Path>();
         }
 
+        public HashSet<Path> GetAvaiblePathsFromCurrentCity() {
+            HashSet<Path> avaiblePaths = new HashSet<Path>();
+
+            foreach (var path in CurrentCity.PossiblePaths) {
+                if (!_visitedCity.Contains(path.CitiesPath[0]) || !_visitedCity.Contains(path.CitiesPath[1]))
+                    avaiblePaths.Add(path);
+            }
+
+            return avaiblePaths;
+        }
+        
         public City InitialCity => _initialCity;
 
         public City CurrentCity => _currentCity;
