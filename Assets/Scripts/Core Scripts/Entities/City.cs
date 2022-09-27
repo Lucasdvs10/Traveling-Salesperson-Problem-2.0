@@ -6,6 +6,10 @@ namespace Core_Scripts.Entities {
         private Vector2 _position;
         private HashSet<Path> _possiblePaths;
 
+        public override string ToString() {
+            return $"City at position{_position}";
+        }
+
         public City(Vector2 position, HashSet<Path> possiblePaths) {
             _position = position;
             _possiblePaths = possiblePaths;
