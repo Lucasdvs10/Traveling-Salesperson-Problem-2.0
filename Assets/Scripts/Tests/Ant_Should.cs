@@ -113,7 +113,7 @@ namespace Tests {
 
             _ant.TravelOnPath(mockPath1);//City A to City B
             _ant.TravelOnPath(mockPath2);//City B to City C
-            _ant.PickNextCityAndGo();//Should be City C to City A
+            _ant.ResetAnt();//Should be City C to City A
             
             Assert.AreEqual(0, _ant.TotalDistance);
             Assert.AreEqual(0, _ant.VisitedPaths.Count);

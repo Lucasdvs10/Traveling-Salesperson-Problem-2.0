@@ -41,7 +41,7 @@ namespace Core_Scripts.Entities {
             
         }
 
-        private void ResetAnt() {
+        public void ResetAnt() {
             ReturnToInitialCity();
             _totalDistance = 0;
             _visitedPaths.Clear();
