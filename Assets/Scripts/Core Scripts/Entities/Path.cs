@@ -6,11 +6,11 @@ namespace Core_Scripts.Entities {
         private float _distance;
         private float _pheromonAmount;
 
-
-        public Path(City cityA, City cityB, float pheromonAmount) {
-            _citiesPath = new City[] { cityA, cityB };
-            _pheromonAmount = pheromonAmount;
-            _distance = Vector2.Distance(cityA.Position, cityB.Position);
+        public static Path CreatePathAndInsertInCities(City cityA, City cityB, float pheromonAmount) {
+            var pathToReturn = new Path(cityA, cityB, pheromonAmount);
+            cityA.AddPathToSet(pathToReturn);
+            cityB.AddPathToSet(pathToReturn);
+            return pathToReturn;
         }
 
         public override int GetHashCode() {
@@ -21,6 +21,12 @@ namespace Core_Scripts.Entities {
             return obj.GetHashCode() == GetHashCode();
         }
 
+        public Path(City cityA, City cityB, float pheromonAmount) {
+            _citiesPath = new City[] { cityA, cityB };
+            _pheromonAmount = pheromonAmount;
+            _distance = Vector2.Distance(cityA.Position, cityB.Position);
+        }
+        
         public void SetPheromonAmount(float newAmount) => _pheromonAmount = newAmount;
         public City[] CitiesPath => _citiesPath;
         public float Distance => _distance;

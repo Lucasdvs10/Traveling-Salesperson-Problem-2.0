@@ -21,8 +21,8 @@ namespace Core_Scripts.Entities {
             }
         }
 
-        public PheromonCalculator(float evaporationrate, float constantq) {
-            _EVAPORATIONRATE = evaporationrate;
+        public PheromonCalculator(float evaporationRate, float constantq) {
+            _EVAPORATIONRATE = evaporationRate;
             CONSTANTQ = constantq;
         }
     }

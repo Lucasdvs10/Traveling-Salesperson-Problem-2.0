@@ -17,18 +17,9 @@ namespace Tests {
             var cityB = new City(Vector2.right * 5);
             var cityC = new City(Vector2.left * 5);
 
-            mockPath1 = new Path(cityA, cityB, 10);
-            mockPath2 = new Path(cityA, cityC, 10);
-            mockPath3 = new Path(cityB, cityC, 10);
-            
-            cityA.AddPathToSet(mockPath1);
-            cityB.AddPathToSet(mockPath1);
-            
-            cityA.AddPathToSet(mockPath2);
-            cityC.AddPathToSet(mockPath2);
-
-            cityB.AddPathToSet(mockPath3);
-            cityC.AddPathToSet(mockPath3);
+            mockPath1 = Path.CreatePathAndInsertInCities(cityA, cityB, 10);
+            mockPath2 = Path.CreatePathAndInsertInCities(cityA, cityC, 10);
+            mockPath3 = Path.CreatePathAndInsertInCities(cityB, cityC, 10);
             
             mockAnt = new Ant(cityA, 1, 1);
 
