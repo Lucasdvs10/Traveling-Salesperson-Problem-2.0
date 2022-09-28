@@ -13,6 +13,10 @@ namespace Core_Scripts.Entities {
             return pathToReturn;
         }
 
+        public override string ToString() {
+            return $"Ligação entre a cidade {_citiesPath[0]} e a cidade {_citiesPath[1]}";
+        }
+
         public override int GetHashCode() {
             return _citiesPath[0].GetHashCode() + _citiesPath[1].GetHashCode();
         }
