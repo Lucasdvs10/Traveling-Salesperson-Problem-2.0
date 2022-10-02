@@ -12,7 +12,7 @@ namespace MonoBehaviours {
             _citiesContainer = FindObjectsOfType<CityBehaviour>().ToList();
         }
 
-        private void Start() {
+        private void Start() { //Inserting Paths in Cities
             if(_citiesContainer.Count <= 1) { //Se for menor ou igual a 1, nem faz nada
                 print("Número de cidades inválido! Deve-se ter pelo menos duas cidades");
                 return;
@@ -26,5 +26,7 @@ namespace MonoBehaviours {
                 }
             }
         }
+
+        public List<CityBehaviour> CitiesContainer => _citiesContainer;
     }
 }
