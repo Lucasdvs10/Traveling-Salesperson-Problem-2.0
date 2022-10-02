@@ -7,9 +7,11 @@ namespace MonoBehaviours {
     //todo: Talvez city manager não seja um bom nome, pois ele tbm tá gerenciando e instanciando os paths
     public class CityManagerBehaviour : MonoBehaviour {
         private List<CityBehaviour> _citiesContainer;
+        private HashSet<Path> _pathsContainer;
 
         private void Awake() {
             _citiesContainer = FindObjectsOfType<CityBehaviour>().ToList();
+            _pathsContainer = new HashSet<Path>();
         }
 
         private void Start() { //Inserting Paths in Cities
@@ -22,10 +24,18 @@ namespace MonoBehaviours {
 
                 for (var j = i+1; j < _citiesContainer.Count; j++) {
                     var nextCity = _citiesContainer[j].CityEntity;
-                    Path.CreatePathAndInsertInCities(currentCity, nextCity, 10f);
+                    _pathsContainer.Add(Path.CreatePathAndInsertInCities(currentCity, nextCity, 10f));
                 }
             }
         }
+        [ContextMenu("Printar todos os paths")]
+        public void PrintAllPaths() {
+            foreach (var path in PathsContainer) {
+                print(path);
+            }
+        }
+
+        public HashSet<Path> PathsContainer => _pathsContainer;
 
         public List<CityBehaviour> CitiesContainer => _citiesContainer;
     }

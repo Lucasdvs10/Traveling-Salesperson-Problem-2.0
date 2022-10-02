@@ -17,7 +17,7 @@ namespace Core_Scripts.Entities {
             var probabilitySum = 0f;
             
             if (GetAvaiblePathsFromCurrentCity().Count == 0) {
-                ResetAnt();
+                ReturnToInitialCity();
                 return;
             }
             
@@ -42,7 +42,6 @@ namespace Core_Scripts.Entities {
         }
 
         public void ResetAnt() {
-            ReturnToInitialCity();
             _totalDistance = 0;
             _visitedPaths.Clear();
             _visitedCities.Clear();
@@ -72,7 +71,10 @@ namespace Core_Scripts.Entities {
         }
 
         public void ReturnToInitialCity() {
-            _currentCity = _initialCity;
+            foreach (var possiblePath in _currentCity.PossiblePaths) {
+                if(possiblePath.CitiesPath[0] == _initialCity || possiblePath.CitiesPath[1] == _initialCity)
+                    TravelOnPath(possiblePath);
+            }
         }
         
         

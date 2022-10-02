@@ -14,7 +14,7 @@ namespace Core_Scripts.Entities {
         }
 
         public override string ToString() {
-            return $"Ligação entre a cidade {_citiesPath[0]} e a cidade {_citiesPath[1]}";
+            return $"Ligação entre a cidade {_citiesPath[0]} e a cidade {_citiesPath[1]}. Feromônios: {_pheromonAmount}";
         }
 
         public override int GetHashCode() {

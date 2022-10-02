@@ -66,6 +66,7 @@ namespace Tests {
             
             Path mockPath1 = Path.CreatePathAndInsertInCities(cityA, cityB, Mathf.Infinity) ;
             Path mockPath2 = Path.CreatePathAndInsertInCities(cityB, cityC, Mathf.Infinity) ;
+            Path mockPath3 = Path.CreatePathAndInsertInCities(cityA, cityC, 1f) ;
 
             _ant.TravelOnPath(mockPath1);//City A to City B
             _ant.TravelOnPath(mockPath2);//City B to City C
@@ -94,6 +95,31 @@ namespace Tests {
             Assert.AreEqual(0, _ant.VisitedPaths.Count);
             Assert.AreEqual(0, _ant.VisitedCities.Count);
         }
+
+        [Test]
+        public void Add_Visited_Paths_To_Set() {
+            var cityA = new City(Vector2.zero);
+            var cityB = new City(Vector2.right * 10);
+            var mockPath = Path.CreatePathAndInsertInCities(cityA, cityB, 10f);
+
+            _ant = new Ant(cityA, 1, 1);
+            
+            _ant.PickNextCityAndGo();
+            
+            Assert.IsTrue(_ant.VisitedPaths.Contains(mockPath));
+        }
         
+        [Test]
+        public void Add_Visited_Cities_To_Set() {
+            var cityA = new City(Vector2.zero);
+            var cityB = new City(Vector2.right * 10);
+            var mockPath = Path.CreatePathAndInsertInCities(cityA, cityB, 10f);
+
+            _ant = new Ant(cityA, 1, 1);
+            
+            _ant.PickNextCityAndGo();
+            
+            Assert.IsTrue(_ant.VisitedCities.Contains(cityB));
+        }
     }
 }
