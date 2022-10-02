@@ -38,6 +38,9 @@ namespace MonoBehaviours {
             
             //Após o ciclo, recalcular todos os feromonios
             _pheromonCalculator.CalculatePathPheromon(_antsSet, _cityManagerBehaviour.PathsContainer);
+            foreach (var ant in _antsSet) {
+                ant.ResetAnt();
+            }
 
         }
 
