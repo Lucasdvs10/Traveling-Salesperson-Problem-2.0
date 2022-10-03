@@ -18,7 +18,7 @@ namespace Core_Scripts.Entities {
         }
 
         public override int GetHashCode() {
-            return _citiesPath[0].GetHashCode() + _citiesPath[1].GetHashCode();
+            return _citiesPath[0].GetHashCode() * _citiesPath[1].GetHashCode();
         }
 
         public override bool Equals(object obj) {
