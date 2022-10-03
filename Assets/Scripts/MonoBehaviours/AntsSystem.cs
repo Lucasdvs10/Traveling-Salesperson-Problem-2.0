@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core_Scripts.Entities;
@@ -10,6 +11,7 @@ namespace MonoBehaviours {
         [SerializeField] private float _evaporationRate;
         [SerializeField] private float _constantQ;
         [SerializeField] private int _numberOfCycles;
+        private PathsDrawer _pathsDrawer;
         
         private CityManagerBehaviour _cityManagerBehaviour;
         private List<CityBehaviour> _allCitiesList;
@@ -17,6 +19,8 @@ namespace MonoBehaviours {
         private PheromonCalculator _pheromonCalculator;
         private void Awake() {
             _cityManagerBehaviour = FindObjectOfType<CityManagerBehaviour>();
+            _pathsDrawer = FindObjectOfType<PathsDrawer>();
+
             _antsSet = new HashSet<Ant>();
             _pheromonCalculator = new PheromonCalculator(_evaporationRate, _constantQ);
         }
@@ -27,6 +31,11 @@ namespace MonoBehaviours {
             foreach (var cityBehaviour in _allCitiesList) {
                 _antsSet.Add(new Ant(cityBehaviour.CityEntity, _pheromonInfluence, _distanceInfluence));
             }
+        }
+
+        private void Update() {
+            RunOneCycle();
+            _pathsDrawer.DrawBestPath();
         }
 
         [ContextMenu("Rodar um ciclo")]

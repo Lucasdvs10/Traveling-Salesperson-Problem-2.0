@@ -36,8 +36,10 @@ namespace Core_Scripts.Entities {
                     return;
                 }
             }
-            
-            TravelOnPath(GetAvaiblePathsFromCurrentCity().ToArray()[0]);
+
+            var pathsList = GetAvaiblePathsFromCurrentCity().ToList();
+            pathsList.Sort();
+            TravelOnPath(pathsList.First());
             
         }
 
