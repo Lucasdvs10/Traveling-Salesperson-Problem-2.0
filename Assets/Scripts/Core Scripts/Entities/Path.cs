@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 
 namespace Core_Scripts.Entities {
-    public class Path {
+    public class Path : IComparable<Path> {
         private City[] _citiesPath;
         private float _distance;
         private float _pheromonAmount;
@@ -19,6 +20,16 @@ namespace Core_Scripts.Entities {
 
         public override int GetHashCode() {
             return _citiesPath[0].GetHashCode() * _citiesPath[1].GetHashCode();
+        }
+
+        public int CompareTo(Path other) {
+            if (_pheromonAmount < other.PheromonAmount) 
+                return 1;
+            
+            if (_pheromonAmount == other.PheromonAmount)
+                return 0;
+            
+            return -1;
         }
 
         public override bool Equals(object obj) {

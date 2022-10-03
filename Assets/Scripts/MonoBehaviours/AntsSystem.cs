@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core_Scripts.Entities;
 using UnityEngine;
 
@@ -51,7 +50,15 @@ namespace MonoBehaviours {
             for (int i = 0; i < _numberOfCycles; i++) {
                 RunOneCycle();
             }
+
+            
+            
+            foreach (var path in _cityManagerBehaviour.GetBestPath()) {
+                print(path);
+            }
         }
+        
+        
 
     }
 }

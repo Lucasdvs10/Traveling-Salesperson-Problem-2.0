@@ -50,11 +50,12 @@ namespace Core_Scripts.Entities {
             _visitedPaths.Add(path);
             _totalDistance += path.Distance;
 
-            if (path.CitiesPath[1] != _currentCity) {
-                GoToCity(path.CitiesPath[1]);
+            if (path.CitiesPath[1] == _currentCity) {
+                GoToCity(path.CitiesPath[0]);
                 return;
             }
-            GoToCity(path.CitiesPath[0]);
+            if(path.CitiesPath[0] == _currentCity)
+                GoToCity(path.CitiesPath[1]);
         }
 
         public void GoToCity(City city) {

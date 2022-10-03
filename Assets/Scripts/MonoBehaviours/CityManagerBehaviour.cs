@@ -24,7 +24,7 @@ namespace MonoBehaviours {
 
                 for (var j = i+1; j < _citiesContainer.Count; j++) {
                     var nextCity = _citiesContainer[j].CityEntity;
-                    _pathsContainer.Add(Path.CreatePathAndInsertInCities(currentCity, nextCity, 10f));
+                    _pathsContainer.Add(Path.CreatePathAndInsertInCities(currentCity, nextCity, 1f));
                 }
             }
         }
@@ -35,17 +35,17 @@ namespace MonoBehaviours {
             }
         }
 
-        public Path GetBestPath() {
-            var currentBestAmount = 0f;
-            Path currentBestPath = new Path(null, null,0f);
-            foreach (var path in _pathsContainer) {
-                if (path.PheromonAmount > currentBestAmount) {
-                    currentBestAmount = path.PheromonAmount;
-                    currentBestPath = path;
-                }
+        public List<Path> GetBestPath() {
+            var pathsList = _pathsContainer.ToList();
+            pathsList.Sort();
+
+            var listToReturn = new List<Path>();
+
+            for (var i = 0; i< _citiesContainer.Count; i++) {
+                listToReturn.Add(pathsList[i]);
             }
 
-            return currentBestPath;
+            return listToReturn;
         }
 
         public HashSet<Path> PathsContainer => _pathsContainer;
