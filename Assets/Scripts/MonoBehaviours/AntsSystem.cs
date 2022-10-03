@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Core_Scripts.Entities;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace MonoBehaviours {
         [SerializeField] private float _distanceInfluence;
         [SerializeField] private float _evaporationRate;
         [SerializeField] private float _constantQ;
+        [SerializeField] private int _numberOfCycles;
         
         private CityManagerBehaviour _cityManagerBehaviour;
         private List<CityBehaviour> _allCitiesList;
@@ -28,7 +30,7 @@ namespace MonoBehaviours {
             }
         }
 
-        [ContextMenu("Rodar ciclo")]
+        [ContextMenu("Rodar um ciclo")]
         public void RunOneCycle() {
             foreach (var cityBehaviour in _allCitiesList) { //Um ciclo consiste em: As formigas percorrerem todas as cidades e depois recalcular os feromonios de cada caminho
                 foreach (var ant in _antsSet) {
@@ -42,6 +44,13 @@ namespace MonoBehaviours {
                 ant.ResetAnt();
             }
 
+        }
+
+        [ContextMenu("Rodar multiplos ciclos")]
+        public void RunMutipleCycles() {
+            for (int i = 0; i < _numberOfCycles; i++) {
+                RunOneCycle();
+            }
         }
 
     }
