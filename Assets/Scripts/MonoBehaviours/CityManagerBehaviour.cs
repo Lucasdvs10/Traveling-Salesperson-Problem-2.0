@@ -35,6 +35,19 @@ namespace MonoBehaviours {
             }
         }
 
+        public Path GetBestPath() {
+            var currentBestAmount = 0f;
+            Path currentBestPath = new Path(null, null,0f);
+            foreach (var path in _pathsContainer) {
+                if (path.PheromonAmount > currentBestAmount) {
+                    currentBestAmount = path.PheromonAmount;
+                    currentBestPath = path;
+                }
+            }
+
+            return currentBestPath;
+        }
+
         public HashSet<Path> PathsContainer => _pathsContainer;
 
         public List<CityBehaviour> CitiesContainer => _citiesContainer;
