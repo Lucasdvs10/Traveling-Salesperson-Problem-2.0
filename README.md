@@ -6,3 +6,7 @@ The travelling salesperson problem Aka TSP asks the following question: "Given a
 ## My previous project
 In january 2019 I published on github my first version of TSP made in javascript using Processing js library. Here's a [link](https://github.com/Lucasdvs10/Traveller-Salesperson-Problem) to the repo. In that time I was just starting my studies in computer science and when I read those codes today, I just don't recognize it. So I decided to remake that project applying the knowledge that I acquired in the last 3 years.
 
+## The algorithm I used
+
+In this version I used the ant colony optimization, wich is an algorithm that simulates the behaviour of ants looking for food.
+
