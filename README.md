@@ -10,3 +10,8 @@ In january 2019 I published on github my first version of TSP made in javascript
 
 In this version I used the ant colony optimization, wich is an algorithm that simulates the behaviour of ants looking for food.
 
+When the program initializes, it instantiates one ant for each city. Every city is connected to each other and the ants must travel through the paths and return to their initial city when there's no other city to visit. 
+During the travel, ants leave a path of pheromon, wich evaporates over time. When the ants are deciding wich path to chose, they make this decision based on the pheromon amount and the distance of the path.
+
+The idea is basically it. For a more visually exemple, check this Sebastian Lague's video: https://www.youtube.com/watch?v=X-iSQQgOd1A
+
