@@ -36,4 +36,4 @@ Writing tests in Unity is can be harder than writing test in "conventional" soft
 The print above is the performace of the program with 45 cities. As you can see, it's not performatic at all. 
 I'd like to improve it, but I still don't have technical skills enough to do so.
 
-
+Recently I was serching about performace improve and I found this programming paradigm called Data Oriented Design. I'd like to learn more about it and try to implement it in Travelling Salesperson Problem
