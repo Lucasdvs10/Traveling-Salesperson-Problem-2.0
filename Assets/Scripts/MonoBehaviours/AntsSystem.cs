@@ -34,7 +34,7 @@ namespace MonoBehaviours {
         }
 
         private void Update() {
-            // RunOneCycle();
+            RunOneCycle();
             _pathsDrawer.DrawBestPath();
         }
 
